@@ -1,0 +1,12 @@
+.btoon{
+    display: flex;
+    text-align: center;
+    gap: 9px;
+    width: 150rem;
+    margin-left: 370px;
+    margin-top: 37px;
+}
+
+.btoon button{
+    width: 100px;
+}

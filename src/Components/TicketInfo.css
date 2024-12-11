@@ -1,0 +1,29 @@
+.tick{
+    position: absolute; 
+    top: 140px; 
+    left: 1300px; 
+    width: 800px;
+}
+.tick h3{
+    margin-left: 250px;
+}
+
+.tick p{
+    margin-top: 40px;
+    text-align: center;
+}
+
+
+  
+.bordered {
+    border: 2px solid #000000; 
+    width: 300px;
+    height: 110px;
+    border-radius: 8px; 
+    padding: 10px; 
+    margin: 10px auto; 
+    display:flexbox;
+    border-radius: 10px;
+
+}
+  
