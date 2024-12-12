@@ -5,18 +5,18 @@ import './TicketInfo.css';
 export default function TicketInfo() {
     // State to hold ticket information
     const [ticketInfo, setTicketInfo] = useState({
-        releasedTickets: 0,
+        totalTicketsReleased: 0,
         availableTickets: 0,
-        purchasedTickets: 0,
+        totalTicketsSold: 0,
     });
 
     // Subscribe to WebSocket updates
     useEffect(() => {
-        subscribeToTopic('/topic/ticketUpdates', (data) => {
+        subscribeToTopic('/topic/tickets', (data) => {
             setTicketInfo({
-                releasedTickets: data.releasedTickets,
+                totalTicketsReleased: data.totalTicketsReleased,
                 availableTickets: data.availableTickets,
-                purchasedTickets: data.purchasedTickets,
+                totalTicketsSold: data.totalTicketsSold,
             });
         });
     }, []);
@@ -27,7 +27,7 @@ export default function TicketInfo() {
             <p className="bordered">
                 Released Tickets: <br />
                 <br />
-                {ticketInfo.releasedTickets}
+                {ticketInfo.totalTicketsReleased}
             </p>
             <p className="bordered">
                 Available Tickets: <br />
@@ -37,7 +37,7 @@ export default function TicketInfo() {
             <p className="bordered">
                 Purchased Tickets: <br />
                 <br />
-                {ticketInfo.purchasedTickets}
+                {ticketInfo.totalTicketsSold}
             </p>
         </div>
     );
