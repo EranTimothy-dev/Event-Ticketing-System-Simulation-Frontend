@@ -4,11 +4,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import "./Configuration.css";
+import client from '../Utils/websocket';
 
 export default function Configuration() {
     // State to hold form data
     const [formData, setFormData] = useState({
-        totalTicketCount: '',
+        configId: "1",
+        numberOfTickets: '',
         ticketReleaseRate: '',
         customerRetrievalRate: '',
         maxTicketCapacity: '',
@@ -28,10 +30,14 @@ export default function Configuration() {
         e.preventDefault(); // Prevent default form submission
 
         try {
-            const response = await axios.post('http://localhost:5000/api/configuration', formData);
-            if (response.status === 200) {
+            const response = await axios.post('http://localhost:8080/systemConfigurations/addConfigurations', formData);
+            const startSystem = await axios.post('http://localhost:8080/ticketingSystem/start-system');
+            if (response.status === 200 && startSystem.status === 200) {
                 alert('Configuration submitted successfully!');
                 console.log(response.data);
+            }
+            if (!client.active){
+                client.activate();
             }
         } catch (error) {
             console.error('Error submitting configuration:', error);
@@ -42,12 +48,13 @@ export default function Configuration() {
     // Handle reset form
     const handleReset = () => {
         setFormData({
-            totalTicketCount: '',
+            // configId: "1",
+            numberOfTickets: '',
             ticketReleaseRate: '',
             customerRetrievalRate: '',
             maxTicketCapacity: '',
         });
-        document.getElementById('totalTicketCount').focus(); // Focus on the first input
+        // document.getElementById('totalTicketCount').focus(); // Focus on the first input
     };
 
     return (
@@ -64,14 +71,14 @@ export default function Configuration() {
                     >
                         <br />
 
-                        <Form.Group className="mb-3" controlId="totalTicketCount">
+                        <Form.Group className="mb-3" controlId="numberOfTickets">
                             <Form.Label>Total Ticket Count:</Form.Label>
                             <Form.Control 
                                 className="label" 
                                 type="number" 
-                                name="totalTicketCount"
+                                name="numberOfTickets"
                                 placeholder="Enter total ticket count"
-                                value={formData.totalTicketCount}
+                                value={formData.numberOfTickets}
                                 onChange={handleInputChange}
                                 required
                             />
