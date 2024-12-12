@@ -9,10 +9,16 @@ export default function LogDetails() {
         // Subscribe to WebSocket topic
         subscribeToTopic('/topic/tickets', (message) => {
             const messageBody = JSON.stringify(message);
-            console.log(messageBody)
-            setLogDetails((prevLogs) => [...prevLogs, messageBody]);
+            const correctedString = formatLogs(messageBody);
+            // console.log(messageBody)
+            setLogDetails((prevLogs) => [...prevLogs, correctedString]);
         });
     }, []);
+
+    function formatLogs(logs) {
+        let correctedString = logs.replace(/\\n/g, '"');
+        return correctedString;
+    }
 
     return (
         <div className="log-details-container">
@@ -20,7 +26,7 @@ export default function LogDetails() {
             <div className="log-details-box">
                 <ul>
                     {logDetails.map((log, index) => (
-                        <li key={index}>{JSON.stringify(log)}</li>
+                        <li key={index}>{log}</li>
                     ))}
                 </ul>
             </div>
