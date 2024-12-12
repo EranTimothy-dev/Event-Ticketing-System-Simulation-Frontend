@@ -1,7 +1,11 @@
 import { Client } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
+
+const socket = new SockJS('http://localhost:8080/ws');
 
 const client = new Client({
-    brokerURL: 'ws://your-server-address/ws', // Replace with your WebSocket server URL
+    // brokerURL: 'ws://your-server-address/ws', // Replace with your WebSocket server URL
+    webSocketFactory: () => socket, // Replace with your WebSocket server URL
     reconnectDelay: 5000, // Auto-reconnect if disconnected
     onConnect: () => {
         console.log('Connected to WebSocket');
@@ -35,8 +39,11 @@ export const deactivateWebSocket = () => {
  * @param {function} callback - Function to handle incoming messages.
  */
 export const subscribeToTopic = (topic, callback) => {
-    if (client.connected) {
+    console.log("reachd here")
+    if (client.active) {
+        console.log("client connected successfully!")
         client.subscribe(topic, (message) => {
+            // console.log(message)
             callback(JSON.parse(message.body));
         });
     } else {
