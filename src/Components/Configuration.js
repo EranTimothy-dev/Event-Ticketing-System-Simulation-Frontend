@@ -81,6 +81,7 @@ export default function Configuration() {
                                 value={formData.numberOfTickets}
                                 onChange={handleInputChange}
                                 required
+                                min={0}
                             />
                         </Form.Group>
 
@@ -94,6 +95,7 @@ export default function Configuration() {
                                 value={formData.ticketReleaseRate}
                                 onChange={handleInputChange}
                                 required
+                                min={0}
                             />
                         </Form.Group>
 
@@ -107,6 +109,7 @@ export default function Configuration() {
                                 value={formData.customerRetrievalRate}
                                 onChange={handleInputChange}
                                 required
+                                min={0}
                             />
                         </Form.Group>
 
@@ -120,6 +123,7 @@ export default function Configuration() {
                                 value={formData.maxTicketCapacity}
                                 onChange={handleInputChange}
                                 required
+                                min={0}
                             />
                         </Form.Group>
 
