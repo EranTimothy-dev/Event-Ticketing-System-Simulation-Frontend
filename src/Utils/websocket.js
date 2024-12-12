@@ -43,7 +43,6 @@ export const subscribeToTopic = (topic, callback) => {
         console.error("client not initialized");
         return;
     }
-    console.log("reachd here")
     try{
         const interval = setInterval(() => {
             if (client.active) {
@@ -60,7 +59,7 @@ export const subscribeToTopic = (topic, callback) => {
             } else {
                 console.warn('WebSocket connection is not established yet');
             }
-        },5000); // check every 1000ms
+        },5000); // check every 5s
     } catch (error){
         console.warn(error)
     }

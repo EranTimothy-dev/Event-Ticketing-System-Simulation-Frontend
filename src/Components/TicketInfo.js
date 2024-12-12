@@ -23,13 +23,6 @@ export default function TicketInfo() {
         });
     }, []);
 
-    // subscribeToTopic('/topic/tickets', (data) => {
-    //     setTicketInfo({
-    //         totalTicketsReleased: data.totalTicketsReleased,
-    //         availableTickets: data.availableTickets,
-    //         totalTicketsSold: data.totalTicketsSold,
-    //     });
-    // });
 
     return (
         <div className="tick">
