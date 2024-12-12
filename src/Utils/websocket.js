@@ -39,15 +39,30 @@ export const deactivateWebSocket = () => {
  * @param {function} callback - Function to handle incoming messages.
  */
 export const subscribeToTopic = (topic, callback) => {
+    if (!client){
+        console.error("client not initialized");
+        return;
+    }
     console.log("reachd here")
-    if (client.active) {
-        console.log("client connected successfully!")
-        client.subscribe(topic, (message) => {
-            // console.log(message)
-            callback(JSON.parse(message.body));
-        });
-    } else {
-        console.warn('WebSocket connection is not established yet');
+    try{
+        const interval = setInterval(() => {
+            if (client.active) {
+                console.log("client connected successfully!")
+                try{
+                    client.subscribe(topic, (message) => {
+                        // console.log(message)
+                        callback(JSON.parse(message.body));
+                    });
+                    clearInterval(interval);
+                } catch (error) {
+                    console.warn("error");
+                }
+            } else {
+                console.warn('WebSocket connection is not established yet');
+            }
+        },5000); // check every 1000ms
+    } catch (error){
+        console.warn(error)
     }
 };
 

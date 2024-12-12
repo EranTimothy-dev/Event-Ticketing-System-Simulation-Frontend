@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { subscribeToTopic } from '../Utils/websocket'; // Import the shared WebSocket connection
 import './TicketInfo.css';
+import client from '../Utils/websocket';
 
 export default function TicketInfo() {
     // State to hold ticket information
@@ -12,6 +13,7 @@ export default function TicketInfo() {
 
     // Subscribe to WebSocket updates
     useEffect(() => {
+        client.activate();
         subscribeToTopic('/topic/tickets', (data) => {
             setTicketInfo({
                 totalTicketsReleased: data.totalTicketsReleased,
@@ -20,6 +22,14 @@ export default function TicketInfo() {
             });
         });
     }, []);
+
+    // subscribeToTopic('/topic/tickets', (data) => {
+    //     setTicketInfo({
+    //         totalTicketsReleased: data.totalTicketsReleased,
+    //         availableTickets: data.availableTickets,
+    //         totalTicketsSold: data.totalTicketsSold,
+    //     });
+    // });
 
     return (
         <div className="tick">
