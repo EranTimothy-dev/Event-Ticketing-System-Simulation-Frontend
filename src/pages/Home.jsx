@@ -3,7 +3,7 @@ import Configuration from '../Components/Configuration'
 import Logo from '../Components/Logo'
 import ControlStop from '../Components/ControlStop'
 import TicketInfo from '../Components/TicketInfo'
-import TicketChart from '../Components/TicketChart'
+import LogDetails from '../Components/LogDetails'
 
 function Home() {
   return (
@@ -12,7 +12,7 @@ function Home() {
     <Logo/>
     <ControlStop/>
     <TicketInfo/>
-    <TicketChart/>
+    <LogDetails/>
     </div>
   )
 }
