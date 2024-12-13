@@ -1,17 +1,19 @@
 .logo-container {
     position: absolute; 
-    top: 10px; 
+    top: -5vh; 
     left: 10px; 
     z-index: 1000; 
+    display: flex;
+    
 }
   
 
 .logo-image {
-    width: 200px;
-    height: auto; 
+    width: 20vw;
+    /* height: auto;  */
     object-fit: contain; 
     cursor: pointer; 
-    margin-top: 35px;
-    margin-left: 40px;
+    /* margin-top: 35px;
+    margin-left: 40px; */
 }
   
